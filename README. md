@@ -1,0 +1,22 @@
+# Smart URL Shortener
+
+A simple web application that converts long URLs into short, shareable links.
+
+## Features
+
+- Generate short URLs from long links
+- Custom short aliases
+- Automatic URL correction (adds https:// if missing)
+- Click tracking analytics
+- Copy-to-clipboard button
+- Responsive UI using Bootstrap
+
+## Tech Stack
+
+- Python
+- Flask
+- SQLite
+- Flask-SQLAlchemy
+- Bootstrap
+
+## Project Structure
