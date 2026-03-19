@@ -178,7 +178,7 @@ class URL(db.Model):
     clicks = db.Column(db.Integer, default=0)
 
 with app.app_context():
-db.create_all()
+    db.create_all()
 
 
 # Function to generate short codes
