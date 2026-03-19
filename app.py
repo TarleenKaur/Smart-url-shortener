@@ -391,6 +391,15 @@ def redirect_to_url(short_code):
     return "URL not found"
 
 
+@app.route("/init-db")
+def init_db():
+    try:
+        db.create_all()
+        return "Database initialized successfully!"
+    except Exception as e:
+        return str(e)
+
+
 # Local run only
 if __name__ == "__main__":
     app.run(debug=True)
