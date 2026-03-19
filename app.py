@@ -135,10 +135,41 @@ import string
 app = Flask(__name__)
 
 # Database configuration
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///urls.db"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///urls.db"
+
+import os
+
+database_url = os.environ.get("DATABASE_URL")
+
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+if not database_url:
+    database_url = "sqlite:///urls.db"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
+with app.app_context():
+    db.create_all()
+
+
+
+# import os
+
+# database_url = os.environ.get("DATABASE_URL")
+
+# # Fix Render PostgreSQL URL issue (VERY IMPORTANT)
+# if database_url and database_url.startswith("postgres://"):
+#     database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+# app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# db = SQLAlchemy(app)
 
 
 # Database Model
@@ -251,6 +282,9 @@ def redirect_to_url(short_code):
 
 import os
 
+# if __name__ == "__main__":
+#     port = int(os.environ.get("PORT", 5000))
+#     app.run(host="0.0.0.0", port=port)
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
