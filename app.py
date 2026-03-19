@@ -321,8 +321,8 @@ class URL(db.Model):
     clicks = db.Column(db.Integer, default=0)
 
 # ✅ Create tables (TEMPORARY for first deploy)
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+    # db.create_all()
 
 
 # Function to generate short codes
