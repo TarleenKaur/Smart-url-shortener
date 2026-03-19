@@ -153,9 +153,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 with app.app_context():
-    db.create_all()
-
-
+    # db.create_all()
 
 # import os
 
@@ -178,6 +176,9 @@ class URL(db.Model):
     original_url = db.Column(db.String(500), nullable=False)
     short_code = db.Column(db.String(10), unique=True, nullable=False)
     clicks = db.Column(db.Integer, default=0)
+
+with app.app_context():
+db.create_all()
 
 
 # Function to generate short codes
